@@ -1,20 +1,20 @@
 export const siteConfig = {
-  name: "Ryan Fitzgerald",
-  title: "Senior Software Engineer",
+  name: "Kevin Lucas",
+  title: "Senior Mobile Engineer",
   description: "Portfolio website of Ryan Fitzgerald",
-  accentColor: "#1d4ed8",
+  accentColor: "#08D665",
   social: {
-    email: "your-email@example.com",
-    linkedin: "https://linkedin.com/in/yourprofile",
-    twitter: "https://x.com/rfitzio",
-    github: "https://github.com/RyanFitzgerald",
+    email: "kevinlucas.tec.info@gmail.com",
+    linkedin: "https://www.linkedin.com/in/keviinlucas/",
+    twitter: "",
+    github: "https://github.com/kevin-lucas",
   },
   aboutMe:
     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem quos asperiores nihil consequatur tempore cupiditate architecto natus commodi corrupti quas quasi facere est, dignissimos odit nam veniam sapiente ut, vitae eligendi ipsum dolor, nostrum ullam impedit! Corrupti ratione mollitia temporibus necessitatibus, consectetur reiciendis recusandae id, dolorum quaerat, vero pariatur. Ratione!",
-  skills: ["Javascript", "React", "Node.js", "Python", "AWS", "Docker"],
+  skills: ["Kotlin", "Android", "Compose", "Kotlin Multiplatform", "Java", "MVVM"],
   projects: [
     {
-      name: "AI Dev Roundup Newsletter",
+      name: "Escriba App",
       description:
         "One concise email. Five minutes. Every Tuesday. Essential AI news & trends, production-ready libraries, powerful AI tools, and real-world code examples",
       link: "https://aidevroundup.com/?ref=devportfolio",
@@ -37,9 +37,9 @@ export const siteConfig = {
   ],
   experience: [
     {
-      company: "Tech Company",
-      title: "Senior Software Engineer",
-      dateRange: "Jan 2022 - Present",
+      company: "Fretebras",
+      title: "Desenvolvedor Mobile Sênior",
+      dateRange: "Ago 2024 - Atualmente",
       bullets: [
         "Led development of microservices architecture serving 1M+ users",
         "Reduced API response times by 40% through optimization",
@@ -47,9 +47,9 @@ export const siteConfig = {
       ],
     },
     {
-      company: "Startup Inc",
-      title: "Full Stack Developer",
-      dateRange: "Jun 2020 - Dec 2021",
+      company: "Deal Technologies",
+      title: "Desenvolvedor Mobile Pleno",
+      dateRange: "Nov 2022 - Mar 2024",
       bullets: [
         "Built and launched MVP product from scratch using React and Node.js",
         "Implemented CI/CD pipeline reducing deployment time by 60%",
