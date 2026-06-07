@@ -32,21 +32,21 @@ export const siteConfig = {
   ],
   projects: [
     {
-      name: "App Empresas — Fretebras",
+      name: "App Fretebras - Empresas",
       description:
         "Aplicativo multiplataforma (Android e iOS) desenvolvido do zero com Kotlin Multiplatform, incluindo chat em tempo real e chamadas de voz in-app entre empresas e motoristas.",
       link: "https://play.google.com/store/apps/details?id=com.frete.shipper&pcampaignid=web_share",
       skills: ["Kotlin", "KMP/KMM", "Jetpack Compose", "Swift", "Firebase"],
     },
     {
-      name: "Central de Pendências",
+      name: "App Fretebras - Central de Pendências",
       description:
         "Funcionalidade crítica no app Android para motoristas focada em mitigação de fraudes, lançada para centenas de milhares de usuários com alta crash-free rate em produção.",
       link: "https://play.google.com/store/apps/details?id=br.lgfelicio&pcampaignid=web_share",
       skills: ["Kotlin", "Jetpack Compose", "Firebase", "MVVM", "Clean Architecture"],
     },
     {
-      name: "Gesuas App",
+      name: "Gesuas Mobile",
       description:
         "Primeira versão do aplicativo mobile da empresa para o segmento de Assistência Social, desenvolvido do zero (0 a 1) e publicado na Google Play Store.",
       link: "https://play.google.com/store/apps/details?id=com.jungle.gesuasmobile&pcampaignid=web_share",
