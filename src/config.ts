@@ -32,21 +32,28 @@ export const siteConfig = {
   ],
   projects: [
     {
-      name: "App Empresas — Fretebras (KMP/KMM)",
+      name: "App Empresas — Fretebras",
       description:
         "Aplicativo multiplataforma (Android e iOS) desenvolvido do zero com Kotlin Multiplatform, incluindo chat em tempo real e chamadas de voz in-app entre empresas e motoristas.",
       link: "https://play.google.com/store/apps/details?id=com.frete.shipper&pcampaignid=web_share",
       skills: ["Kotlin", "KMP/KMM", "Jetpack Compose", "Swift", "Firebase"],
     },
     {
-      name: "Central de Pendências — Deal Technologies",
+      name: "Central de Pendências",
       description:
         "Funcionalidade crítica no app Android para motoristas focada em mitigação de fraudes, lançada para centenas de milhares de usuários com alta crash-free rate em produção.",
       link: "https://play.google.com/store/apps/details?id=br.lgfelicio&pcampaignid=web_share",
       skills: ["Kotlin", "Jetpack Compose", "Firebase", "MVVM", "Clean Architecture"],
     },
     {
-      name: "App de Gestão de Tickets — Luiza Barcelos",
+      name: "Gesuas App",
+      description:
+        "Primeira versão do aplicativo mobile da empresa para o segmento de Assistência Social, desenvolvido do zero (0 a 1) e publicado na Google Play Store.",
+      link: "https://play.google.com/store/apps/details?id=com.jungle.gesuasmobile&pcampaignid=web_share",
+      skills: ["Kotlin", "Android SDK", "MVVM", "Coroutines", "Retrofit", "Room Database"],
+    },
+    {
+      name: "App de Gestão de Tickets",
       description:
         "Aplicativo Android nativo desenvolvido por iniciativa própria para automatizar o controle de tickets de refeição, eliminando custos com insumos físicos e ganho de eficiência operacional.",
       link: "",
@@ -81,7 +88,7 @@ export const siteConfig = {
       title: "Desenvolvedor Android",
       dateRange: "Jun 2021 - Fev 2022",
       bullets: [
-        "Responsável pelo ciclo completo (0 a 1) de desenvolvimento e lançamento da primeira versão do aplicativo mobile da empresa na Google Play Store.",
+        "Responsável pelo ciclo completo de desenvolvimento e lançamento da primeira versão do aplicativo mobile da empresa na Google Play Store.",
         "Definição da arquitetura MVVM com organização modular e separação de responsabilidades para escalabilidade e manutenibilidade.",
         "Integração com APIs REST via Retrofit, concorrência assíncrona com Coroutines e persistência local com Room Database.",
         "Participação ativa em levantamento de requisitos, testes e alinhamento com stakeholders.",
