@@ -10,7 +10,7 @@ export const siteConfig = {
     github: "https://github.com/kevin-lucas",
   },
   aboutMe:
-    "Desenvolvedor Mobile com foco em Kotlin Multiplatform, construindo arquiteturas que compartilham lógica de negócio entre Android e iOS para acelerar o time-to-market. Sólida base em Android nativo com Jetpack Compose, MVVM e Clean Architecture, atuando em squads ágeis do desenvolvimento ao deploy na Play Store e Apple Store",
+    "Desenvolvedor Mobile com foco em Kotlin Multiplatform, construindo arquiteturas que compartilham lógica de negócio entre Android e iOS para acelerar o time-to-market. Sólida base em Android nativo com Jetpack Compose, MVVM e Clean Architecture, atuando em squads ágeis do desenvolvimento ao deploy na Play Store e Apple Store.",
   skills: [
     "Kotlin",
     "Android SDK",
