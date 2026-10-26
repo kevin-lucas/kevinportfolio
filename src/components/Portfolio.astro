@@ -1,0 +1,143 @@
+---
+import { siteConfig } from "../config";
+
+const portfolio = siteConfig.portfolio ?? [];
+---
+
+{
+  portfolio.length > 0 && (
+    <section id="projetos" class="py-24 md:py-28">
+      <div class="mx-auto max-w-6xl px-5">
+        <span class="inline-flex items-center gap-2 rounded-full border border-edge px-3.5 py-1 text-xs text-subtle">
+          <span class="h-1.5 w-1.5 rounded-full bg-lime"></span>
+          Projetos
+        </span>
+        <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold tracking-tight md:text-4xl">
+          Produtos que ajudei a <span class="kl-gradient-text">construir</span>
+        </h2>
+
+        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {portfolio.map((project, i) => (
+            <button
+              type="button"
+              data-case={i}
+              aria-label={`Ver imagens de ${project.name}`}
+              class="group block cursor-pointer rounded-2xl border border-edge bg-surface p-2 text-left transition-[transform,border-color] duration-[450ms] ease-snap hover:-translate-y-1 hover:border-lime/50"
+            >
+              <span class="relative block overflow-hidden rounded-xl">
+                <img src={project.images[0]} alt={project.name} loading="lazy" class="aspect-[16/11] w-full object-cover transition-transform duration-700 ease-snap group-hover:scale-[1.06]" />
+                <span class="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-night/80 px-2.5 py-1 text-[11px] text-ink backdrop-blur">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 8h.01"></path><path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z"></path><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"></path><path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3"></path></svg>
+                  {project.images.length}
+                </span>
+              </span>
+              <span class="flex items-center justify-between gap-4 px-3 pb-3 pt-4">
+                <span>
+                  <span class="block text-xs text-lime">{project.category}</span>
+                  <span class="mt-1 block font-display text-lg font-semibold">{project.name}</span>
+                </span>
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-edge text-subtle transition-[color,border-color,transform] duration-[450ms] ease-snap group-hover:rotate-45 group-hover:border-lime group-hover:text-lime">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M17 7l-10 10"></path><path d="M8 7l9 0l0 9"></path></svg>
+                </span>
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <dialog id="lightbox" class="m-auto max-h-none w-[min(94vw,1100px)] overflow-visible bg-transparent text-ink backdrop:bg-night/95 backdrop:backdrop-blur-sm">
+        <div class="flex items-center justify-between gap-4 pb-4">
+          <p id="lightbox-title" class="font-display text-lg font-semibold"></p>
+          <div class="flex items-center gap-4">
+            <span id="lightbox-counter" class="rounded-full border border-edge px-3 py-1 text-xs text-subtle"></span>
+            <form method="dialog">
+              <button aria-label="Fechar" class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-edge hover:border-lime hover:text-lime">✕</button>
+            </form>
+          </div>
+        </div>
+        <div class="relative flex items-center justify-center">
+          <img id="lightbox-image" src="" alt="" class="max-h-[72vh] w-auto rounded-2xl object-contain" />
+          <button type="button" id="lightbox-prev" aria-label="Imagem anterior" class="absolute left-3 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-night/80 text-xl backdrop-blur transition-colors duration-[450ms] ease-snap hover:bg-lime hover:text-night">←</button>
+          <button type="button" id="lightbox-next" aria-label="Próxima imagem" class="absolute right-3 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-night/80 text-xl backdrop-blur transition-colors duration-[450ms] ease-snap hover:bg-lime hover:text-night">→</button>
+        </div>
+        <div id="lightbox-thumbs" class="mt-5 flex justify-center gap-2.5 overflow-x-auto"></div>
+      </dialog>
+
+      <script type="application/json" id="cases-data" set:html={JSON.stringify(portfolio)} />
+    </section>
+  )
+}
+
+<script>
+  type Case = { name: string; category: string; images: string[] };
+
+  const dataEl = document.getElementById("cases-data");
+  const lightbox = document.getElementById("lightbox") as HTMLDialogElement | null;
+
+  if (dataEl && lightbox) {
+    const cases: Case[] = JSON.parse(dataEl.textContent || "[]");
+    const image = document.getElementById("lightbox-image") as HTMLImageElement;
+    const title = document.getElementById("lightbox-title")!;
+    const counter = document.getElementById("lightbox-counter")!;
+    const thumbs = document.getElementById("lightbox-thumbs")!;
+    const prev = document.getElementById("lightbox-prev")!;
+    const next = document.getElementById("lightbox-next")!;
+    let active: Case = cases[0];
+    let current = 0;
+
+    function show(index: number) {
+      const total = active.images.length;
+      current = (index + total) % total;
+      image.src = active.images[current];
+      image.alt = `${active.name} — imagem ${current + 1}`;
+      counter.textContent = `${current + 1} de ${total}`;
+      thumbs.querySelectorAll("button").forEach((thumb, i) => {
+        thumb.classList.toggle("ring-2", i === current);
+        thumb.classList.toggle("opacity-50", i !== current);
+      });
+    }
+
+    function open(index: number) {
+      active = cases[index];
+      title.textContent = active.name;
+      const single = active.images.length < 2;
+      prev.classList.toggle("hidden", single);
+      next.classList.toggle("hidden", single);
+      thumbs.innerHTML = "";
+      if (!single) {
+        active.images.forEach((src, i) => {
+          const thumb = document.createElement("button");
+          thumb.type = "button";
+          thumb.className = "h-14 w-20 shrink-0 cursor-pointer overflow-hidden rounded-lg ring-lime transition-opacity duration-300";
+          thumb.setAttribute("aria-label", `Imagem ${i + 1}`);
+          thumb.innerHTML = `<img src="${src}" alt="" class="h-full w-full object-cover" />`;
+          thumb.addEventListener("click", () => show(i));
+          thumbs.appendChild(thumb);
+        });
+      }
+      show(0);
+      lightbox!.showModal();
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-case]").forEach((card) =>
+      card.addEventListener("click", () => open(Number(card.dataset.case)))
+    );
+    prev.addEventListener("click", () => show(current - 1));
+    next.addEventListener("click", () => show(current + 1));
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) lightbox.close();
+    });
+    lightbox.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") show(current - 1);
+      if (e.key === "ArrowRight") show(current + 1);
+    });
+
+    let touchX = 0;
+    lightbox.addEventListener("touchstart", (e) => (touchX = e.changedTouches[0].clientX), { passive: true });
+    lightbox.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) show(dx < 0 ? current + 1 : current - 1);
+    });
+  }
+</script>

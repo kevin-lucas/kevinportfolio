@@ -1,78 +1,99 @@
 ---
 import { siteConfig } from "../config";
 
-const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
+const hasServices = siteConfig.services && siteConfig.services.length > 0;
+const hasAbout = !!siteConfig.about;
 const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
-const hasEducation = siteConfig.education && siteConfig.education.length > 0;
+const hasSkills = siteConfig.skills && siteConfig.skills.length > 0;
+const hasPortfolio = siteConfig.portfolio && siteConfig.portfolio.length > 0;
+const hasContact = !!siteConfig.contact;
+
+const links = [
+  { href: "#atuacao", label: "Atuação", show: hasServices },
+  { href: "#sobre", label: "Sobre", show: hasAbout },
+  { href: "#trajetoria", label: "Trajetória", show: hasExperience },
+  { href: "#stack", label: "Stack", show: hasSkills },
+  { href: "#projetos", label: "Projetos", show: hasPortfolio },
+].filter((link) => link.show);
+
+const initials = siteConfig.name
+  .split(" ")
+  .map((part) => part.charAt(0))
+  .join("")
+  .slice(0, 2);
 ---
 
-<header
-  id="header"
-  class="fixed top-0 left-0 right-0 z-50 hidden md:block transition-all duration-300"
->
-  <nav class="max-w-7xl mx-auto px-8 py-4">
-    <ul class="flex items-center gap-8 justify-center">
-      <li>
-        <a
-          href="#about"
-          class="text-gray-700 hover:text-black transition-colors font-medium"
-        >
-          Sobre
-        </a>
-      </li>
+<header id="site-nav" class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background-color,border-color] duration-[450ms] ease-snap">
+  <div class="mx-auto flex h-18 max-w-6xl items-center justify-between gap-6 px-5">
+    <a href="#inicio" class="flex items-center gap-3">
+      <span class="kl-gradient flex h-9 w-9 items-center justify-center rounded-xl font-display text-sm font-semibold text-night">
+        {initials}
+      </span>
+      <span class="font-display text-base font-semibold tracking-tight">{siteConfig.name}</span>
+    </a>
+
+    <nav class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href} class="rounded-full px-4 py-2 text-sm text-subtle transition-colors duration-[450ms] ease-snap hover:bg-surface hover:text-ink">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-3">
       {
-        hasProjects && (
-          <li>
-            <a
-              href="#projects"
-              class="text-gray-700 hover:text-black transition-colors font-medium"
-            >
-              Projetos
-            </a>
-          </li>
+        hasContact && (
+          <a href="#contato" class="kl-gradient hidden rounded-xl px-5 py-2.5 text-sm font-medium text-night transition-[transform,box-shadow] duration-[450ms] ease-snap hover:-translate-y-0.5 hover:shadow-glow sm:inline-flex">
+            Contato
+          </a>
         )
       }
+      <button id="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" class="flex h-10 w-10 items-center justify-center rounded-xl border border-edge text-ink lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 6l16 0"></path><path d="M4 12l16 0"></path><path d="M4 18l16 0"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav id="nav-drawer" class="hidden border-t border-edge bg-night/95 backdrop-blur-md lg:hidden">
+    <ul class="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4">
       {
-        hasExperience && (
+        [...links, ...(hasContact ? [{ href: "#contato", label: "Contato", show: true }] : [])].map((link) => (
           <li>
-            <a
-              href="#experience"
-              class="text-gray-700 hover:text-black transition-colors font-medium"
-            >
-              Carreira
+            <a href={link.href} class="block rounded-xl px-4 py-3 text-sm text-subtle hover:bg-surface hover:text-ink">
+              {link.label}
             </a>
           </li>
-        )
-      }
-      {
-        hasEducation && (
-          <li>
-            <a
-              href="#education"
-              class="text-gray-700 hover:text-black transition-colors font-medium"
-            >
-              Formação
-            </a>
-          </li>
-        )
+        ))
       }
     </ul>
   </nav>
 </header>
 
 <script>
-  window.addEventListener("scroll", () => {
-    const header = document.getElementById("header");
-    if (window.scrollY > 100) {
-      header?.classList.add("bg-white/80", "backdrop-blur-sm");
-    } else {
-      header?.classList.remove("bg-white/80", "backdrop-blur-sm");
-    }
-  });
-</script>
+  const nav = document.getElementById("site-nav");
+  const toggle = document.getElementById("nav-toggle");
+  const drawer = document.getElementById("nav-drawer");
 
-<style>
-  html {
-    scroll-behavior: smooth;
-  }
-</style>
+  toggle?.addEventListener("click", () => {
+    const open = drawer?.classList.toggle("hidden") === false;
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+  drawer?.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => drawer.classList.add("hidden"))
+  );
+
+  const onScroll = () => {
+    const scrolled = window.scrollY > 24;
+    nav?.classList.toggle("bg-night/80", scrolled);
+    nav?.classList.toggle("backdrop-blur-md", scrolled);
+    nav?.classList.toggle("border-edge", scrolled);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+</script>

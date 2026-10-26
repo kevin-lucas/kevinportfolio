@@ -1,40 +1,35 @@
 ---
 import { siteConfig } from "../config";
+
+const about = siteConfig.about;
 ---
 
-<section id="about" class="p-8 sm:p-12 md:p-16 lg:p-24">
-  <div>
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-      <div class="lg:col-span-4">
-        <h2
-          class="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold text-gray-900"
-        >
-          Sobre mim
-        </h2>
-        <div
-          class="w-[75px] h-[5px] mt-2 rounded-full"
-          style={`background-color: ${siteConfig.accentColor}`}
-        >
+{
+  about && (
+    <section id="sobre" class="py-24 md:py-28">
+      <div class="mx-auto grid max-w-6xl items-center gap-14 px-5 md:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full border border-edge px-3.5 py-1 text-xs text-subtle">
+            <span class="h-1.5 w-1.5 rounded-full bg-lime"></span>
+            Sobre mim
+          </span>
+          <h2 class="mt-5 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+            {about.title}{" "}<span class="kl-gradient-text">{about.highlight}</span>
+          </h2>
+          <p class="mt-6 text-base leading-7 text-subtle">{about.text}</p>
+          {about.cvLink && (
+            <a href={about.cvLink} download class="kl-gradient mt-9 inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-night transition-[transform,box-shadow] duration-[450ms] ease-snap hover:-translate-y-0.5 hover:shadow-glow">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path><path d="M7 11l5 5l5 -5"></path><path d="M12 4l0 12"></path></svg>
+              Baixar CV
+            </a>
+          )}
+        </div>
+
+        <div class="relative mx-auto w-full max-w-sm">
+          <div class="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl border border-lime/40" aria-hidden="true"></div>
+          <img src={about.image} alt={siteConfig.name} loading="lazy" class="relative aspect-[4/5] w-full rounded-3xl object-cover" />
         </div>
       </div>
-
-      <div class="lg:col-span-8 space-y-8">
-        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-600">
-          {siteConfig.aboutMe}
-        </p>
-
-        <div class="pt-4">
-          <div class="flex flex-wrap gap-3">
-            {
-              siteConfig.skills.map((skill) => (
-                <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-100 text-gray-800 rounded-full text-sm sm:text-base md:text-lg font-medium hover:bg-gray-200 transition-colors duration-200">
-                  {skill}
-                </span>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+  )
+}

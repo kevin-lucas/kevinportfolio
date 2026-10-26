@@ -1,13 +1,11 @@
-<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon fill="#000000" fill-rule="nonzero" points="0 30.1184211 0 22.9226974 16 14 16 21.5657895 6.00369686 26.3766447 6.00369686 26.6644737 16 31.4753289 16 39"></polygon>
-        <polygon fill="#000000" fill-rule="nonzero" points="31 7 23.9756098 43 19 43 26.0243902 7"></polygon>
-        <polygon fill="#000000" fill-rule="nonzero" points="50 30.1184211 34 39 34 31.4753289 44.025878 26.6644737 44.025878 26.3766447 34 21.5657895 34 14 50 22.9226974"></polygon>
-    </g>
-     <style>
-        polygon { fill: #000; }
-        @media (prefers-color-scheme: dark) {
-            polygon { fill: #FFF; }
-        }
-    </style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <!-- Mesmo gradiente da classe .kl-gradient (120deg, lime -> lime-2 85%) -->
+    <linearGradient id="kl" x1="0.07" y1="0.25" x2="0.93" y2="0.75">
+      <stop offset="0" stop-color="#A3E635"/>
+      <stop offset="1" stop-color="#4ADE80" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="21" fill="url(#kl)"/>
+  <text x="32" y="33" text-anchor="middle" dominant-baseline="central" font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="600" letter-spacing="-0.5" fill="#0A0F0D">KL</text>
 </svg>

@@ -1,0 +1,61 @@
+---
+import { siteConfig } from "../config";
+
+const skills = siteConfig.skills ?? [];
+const SEGMENTS = 10;
+---
+
+{
+  skills.length > 0 && (
+    <section id="stack" class="py-24 md:py-28">
+      <div class="mx-auto max-w-6xl px-5">
+        <span class="inline-flex items-center gap-2 rounded-full border border-edge px-3.5 py-1 text-xs text-subtle">
+          <span class="h-1.5 w-1.5 rounded-full bg-lime"></span>
+          Stack
+        </span>
+        <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold tracking-tight md:text-4xl">
+          Tecnologias do meu <span class="kl-gradient-text">dia a dia</span>
+        </h2>
+
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {skills.map((skill) => (
+            <div class="rounded-2xl border border-edge bg-surface p-6">
+              <div class="flex items-center justify-between">
+                <span class="font-display text-base font-medium">{skill.name}</span>
+                <span class="text-xs text-subtle">{skill.percent}%</span>
+              </div>
+              <div class="mt-5 grid grid-cols-10 gap-1.5" data-meter={Math.round((skill.percent / 100) * SEGMENTS)} aria-hidden="true">
+                {Array.from({ length: SEGMENTS }).map(() => (
+                  <span class="h-2 rounded-sm bg-edge transition-colors duration-[450ms] ease-snap"></span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  const meters = document.querySelectorAll<HTMLElement>("[data-meter]");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const meter = entry.target as HTMLElement;
+        const filled = Number(meter.dataset.meter);
+        Array.from(meter.children).forEach((segment, i) => {
+          if (i >= filled) return;
+          setTimeout(() => {
+            segment.classList.remove("bg-edge");
+            segment.classList.add("bg-lime");
+          }, i * 70);
+        });
+        observer.unobserve(meter);
+      });
+    },
+    { threshold: 0.6 }
+  );
+  meters.forEach((meter) => observer.observe(meter));
+</script>
