@@ -13,6 +13,10 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Variável do repositório (Settings → Secrets and variables → Actions → Variables).
+      # true = site completo; false ou ausente = página "em construção".
+      SITE_PUBLISHED: ${{ vars.SITE_PUBLISHED || 'false' }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4

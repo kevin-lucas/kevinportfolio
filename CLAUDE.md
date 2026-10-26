@@ -12,6 +12,8 @@ There is no linter, type-checker script, or test suite. `npm run build` is the o
 
 Pushing to `master` deploys to GitHub Pages via `.github/workflows/deploy.yml` (`withastro/action`). `astro.config.mjs` sets `site: "https://kevinlucas.com.br"` and `base: "/"` — the site is served from the domain root, so don't add a base path.
 
+`SITE_PUBLISHED` (boolean, declared with `astro:env` in `astro.config.mjs`) decides at build time what `index.astro` renders: `true` = full site, `false` or unset = `UnderConstruction.astro` (with `noindex`). In CI it comes from the GitHub repository variable `vars.SITE_PUBLISHED` (see `deploy.yml`); after changing it, re-run the workflow (`gh workflow run deploy.yml`). Locally the default is the under-construction page — run `SITE_PUBLISHED=true npm run dev` (or put it in `.env`, which is gitignored) to work on the real site.
+
 ## Gotchas and cross-file rules
 
 - Tailwind v4 is configured entirely through `@tailwindcss/vite` and `src/styles/global.css` (`@theme` tokens + `kl-` custom classes). There is no `tailwind.config.js` (the README's file tree is out of date).

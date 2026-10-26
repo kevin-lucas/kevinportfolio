@@ -8,7 +8,9 @@ import Skills from "../components/Skills.astro";
 import Portfolio from "../components/Portfolio.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+import UnderConstruction from "../components/UnderConstruction.astro";
 import { siteConfig } from "../config";
+import { SITE_PUBLISHED } from "astro:env/server";
 import "../styles/global.css";
 ---
 
@@ -19,6 +21,7 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={siteConfig.description} />
+    {!SITE_PUBLISHED && <meta name="robots" content="noindex" />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,16 +31,24 @@ import "../styles/global.css";
     <title>{siteConfig.name} - {siteConfig.title}</title>
   </head>
   <body class="antialiased">
-    <Header />
-    <main>
-      <Hero />
-      <Services />
-      <About />
-      <Experience />
-      <Skills />
-      <Portfolio />
-      <Contact />
-    </main>
-    <Footer />
+    {
+      SITE_PUBLISHED ? (
+        <>
+          <Header />
+          <main>
+            <Hero />
+            <Services />
+            <About />
+            <Experience />
+            <Skills />
+            <Portfolio />
+            <Contact />
+          </main>
+          <Footer />
+        </>
+      ) : (
+        <UnderConstruction />
+      )
+    }
   </body>
 </html>
