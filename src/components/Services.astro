@@ -13,13 +13,16 @@ const services = siteConfig.services ?? [];
           Atuação
         </span>
         <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold tracking-tight md:text-4xl">
-          Como posso ajudar o seu <span class="kl-gradient-text">produto</span>
+          Engenharia que se paga em <span class="kl-gradient-text">resultado</span>
         </h2>
 
         <div class="mt-12 grid gap-5 md:grid-cols-3">
           {services.map((service) => (
             <article class="group rounded-2xl border border-edge bg-surface p-7 transition-[transform,border-color,box-shadow] duration-[450ms] ease-snap hover:-translate-y-1 hover:border-lime/60 hover:shadow-glow">
               <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-lime/10 text-lime">
+                {service.icon === "chart" && (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 19l16 0"></path><path d="M4 15l4 -6l4 2l4 -5l4 4"></path></svg>
+                )}
                 {service.icon === "mobile" && (
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z"></path><path d="M11 4h2"></path><path d="M12 17v.01"></path></svg>
                 )}

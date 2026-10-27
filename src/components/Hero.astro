@@ -49,7 +49,7 @@ const chipPositions = ["-left-4 top-10", "-right-3 top-1/2", "left-6 -bottom-4"]
         <div class="relative mx-auto w-full max-w-sm">
           <div class="kl-gradient-border rounded-3xl p-px">
             <div class="overflow-hidden rounded-3xl bg-surface">
-              <img src={hero.image} alt={siteConfig.name} class="aspect-[4/5] w-full object-cover" />
+              <img src={hero.image} alt={siteConfig.name} width="500" height="620" fetchpriority="high" decoding="async" class="aspect-[4/5] w-full object-cover" />
             </div>
           </div>
           {hero.chips?.map((chip, i) => (

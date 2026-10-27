@@ -11,24 +11,104 @@ import Footer from "../components/Footer.astro";
 import UnderConstruction from "../components/UnderConstruction.astro";
 import { siteConfig } from "../config";
 import { SITE_PUBLISHED } from "astro:env/server";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/600.css";
 import "../styles/global.css";
+
+const seo = siteConfig.seo;
+const pageTitle = `${siteConfig.name} - ${siteConfig.title}`;
+const siteUrl = new URL("/", Astro.site).href;
+const ogImage = seo?.ogImage && new URL(seo.ogImage, Astro.site).href;
+const twitterHandle = siteConfig.social.twitter && `@${siteConfig.social.twitter.replace(/\/+$/, "").split("/").pop()}`;
+const keywords = seo?.keywords ?? [];
+const knowsAbout = [...new Set([...(seo?.knowsAbout ?? []), ...keywords])];
+const sameAs =[siteConfig.social.linkedin, siteConfig.social.github, siteConfig.social.twitter].filter(Boolean);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}#person`,
+      name: siteConfig.name,
+      jobTitle: siteConfig.title,
+      description: siteConfig.description,
+      url: siteUrl,
+      ...(ogImage && { image: ogImage }),
+      ...(siteConfig.social.email && { email: `mailto:${siteConfig.social.email}` }),
+      ...(seo?.address && {
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: seo.address.locality,
+          addressRegion: seo.address.region,
+          addressCountry: seo.address.country,
+        },
+      }),
+      ...(sameAs.length > 0 && { sameAs }),
+      ...(knowsAbout.length > 0 && { knowsAbout }),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      name: siteConfig.name,
+      url: siteUrl,
+      inLanguage: "pt-BR",
+      publisher: { "@id": `${siteUrl}#person` },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${siteUrl}#profile`,
+      url: siteUrl,
+      name: pageTitle,
+      inLanguage: "pt-BR",
+      mainEntity: { "@id": `${siteUrl}#person` },
+      isPartOf: { "@id": `${siteUrl}#website` },
+    },
+  ],
+};
 ---
 
 <html lang="pt-BR" style={`--color-lime: ${siteConfig.accentColor}`}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0f0d" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={siteConfig.description} />
-    {!SITE_PUBLISHED && <meta name="robots" content="noindex" />}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap"
-      rel="stylesheet"
-    />
-    <title>{siteConfig.name} - {siteConfig.title}</title>
+    <title>{pageTitle}</title>
+    {
+      SITE_PUBLISHED ? (
+        <>
+          <link rel="canonical" href={siteUrl} />
+          {keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
+          <meta property="og:type" content="profile" />
+          <meta property="og:site_name" content={siteConfig.name} />
+          <meta property="og:title" content={pageTitle} />
+          <meta property="og:description" content={siteConfig.description} />
+          <meta property="og:url" content={siteUrl} />
+          {seo?.locale && <meta property="og:locale" content={seo.locale} />}
+          {ogImage && (
+            <>
+              <meta property="og:image" content={ogImage} />
+              <meta property="og:image:width" content="1200" />
+              <meta property="og:image:height" content="630" />
+              <meta property="og:image:alt" content={seo.ogImageAlt} />
+            </>
+          )}
+          <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+          <meta name="twitter:title" content={pageTitle} />
+          <meta name="twitter:description" content={siteConfig.description} />
+          {ogImage && <meta name="twitter:image" content={ogImage} />}
+          {twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
+          <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+        </>
+      ) : (
+        <meta name="robots" content="noindex" />
+      )
+    }
   </head>
   <body class="antialiased">
     {

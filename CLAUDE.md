@@ -23,6 +23,7 @@ Pushing to `master` deploys to GitHub Pages via `.github/workflows/deploy.yml` (
 - **Conditional sections:** every section renders nothing when its config data is empty or missing. The `has*` checks in `Header.astro` build the nav links (desktop + mobile drawer). Social links render only when their value is truthy. The contact form only renders when `contact.formAction` (e.g. a Formspree endpoint) is set.
 - **Adding a section:** add data to `config.ts`, create the component with a `<section id="...">`, add it to `index.astro`, and add the matching link / `has*` check in `Header.astro`.
 - **Icons:** Tabler Icons are pasted in as inline `<svg>` markup (no icon package). Copy new icons from tabler.io the same way.
+- **SEO:** `index.astro` builds canonical, Open Graph, Twitter Cards and JSON-LD (`Person` + `WebSite` + `ProfilePage`) from `siteConfig` + `siteConfig.seo`, only when `SITE_PUBLISHED` (otherwise `noindex`). `seo.keywords` feeds both `<meta name="keywords">` and the JSON-LD `knowsAbout` (merged, deduped). `src/pages/robots.txt.ts` and `sitemap.xml.ts` are static endpoints; robots also switches on `SITE_PUBLISHED`. `public/og.png` (1200×630) is the share image — regenerate it if the hero headline changes. Fonts are self-hosted via `@fontsource/*` imports in `index.astro` (no Google Fonts).
 - **UI text:** section labels and headings ("Atuação", "Trajetória", "Baixar CV", nav labels, etc.) are hardcoded in Portuguese in the components, not in config.
 
 ## Conventions (from `.cursor/rules`)
