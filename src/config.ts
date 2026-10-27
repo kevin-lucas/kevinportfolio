@@ -44,7 +44,7 @@ export const siteConfig = {
     address: { locality: "Belo Horizonte", region: "MG", country: "BR" },
   },
   social: {
-    email: "kevinlucas.tec.info@gmail.com",
+    email: "contato@kevinlucas.com.br",
     linkedin: "https://www.linkedin.com/in/keviinlucas/",
     twitter: "",
     github: "https://github.com/kevin-lucas",
@@ -160,7 +160,7 @@ export const siteConfig = {
     title: "Vamos construir algo",
     highlight: "juntos",
     text: "Tem um app em mente ou uma vaga para conversar? Mande uma mensagem e eu respondo o quanto antes.",
-    email: "kevinlucas.tec.info@gmail.com",
+    email: "contato@kevinlucas.com.br",
     // Número com DDD, exibido como está; o link https://wa.me/ adiciona o 55 (Brasil) e usa só os dígitos.
     whatsapp: "(31) 98651-2610",
     address: "Belo Horizonte, MG — Brasil",
