@@ -134,34 +134,26 @@ export const siteConfig = {
   // images[0] é a capa exibida no card; todas aparecem na galeria.
   portfolio: [
     {
-      name: "Fretebras Empresas",
-      category: "Kotlin Multiplatform",
-      images: ["/images/portfolio/projeto-1-1.svg", "/images/portfolio/projeto-1-2.svg", "/images/portfolio/projeto-1-3.svg"],
-    },
-    {
-      name: "Chat e Chamadas in-app",
-      category: "Kotlin Multiplatform",
-      images: ["/images/portfolio/projeto-2-1.svg", "/images/portfolio/projeto-2-2.svg", "/images/portfolio/projeto-2-3.svg"],
-    },
-    {
-      name: "Conta Digital B2C",
-      category: "Android Nativo",
-      images: ["/images/portfolio/projeto-3-1.svg", "/images/portfolio/projeto-3-2.svg", "/images/portfolio/projeto-3-3.svg"],
-    },
-    {
-      name: "Central de Pendências",
-      category: "Android Nativo",
-      images: ["/images/portfolio/projeto-4-1.svg", "/images/portfolio/projeto-4-2.svg", "/images/portfolio/projeto-4-3.svg"],
+      name: "Fretebras",
+      category: "Kotlin Multiplatform e Android Nativo",
+      images: [
+        "/images/portfolio/fretebras-2.jpg",
+        "/images/portfolio/fretebras-3.jpg",
+        "/images/portfolio/fretebras-4.jpg",
+      ],
+      // Opcional: link do app na loja, exibido no card e na galeria.
+      link: "https://play.google.com/store/apps/details?id=br.lgfelicio&hl=pt_BR",
     },
     {
       name: "Gesuas Mobile",
       category: "Android Nativo",
-      images: ["/images/portfolio/projeto-5-1.svg", "/images/portfolio/projeto-5-2.svg", "/images/portfolio/projeto-5-3.svg"],
-    },
-    {
-      name: "App de Tickets de Refeição",
-      category: "Android Nativo",
-      images: ["/images/portfolio/projeto-6-1.svg", "/images/portfolio/projeto-6-2.svg", "/images/portfolio/projeto-6-3.svg"],
+      images: [
+        "/images/portfolio/gesuas-1.jpg",
+        "/images/portfolio/gesuas-2.jpg",
+        "/images/portfolio/gesuas-3.jpg",
+        "/images/portfolio/gesuas-4.jpg",
+      ],
+      link: "https://play.google.com/store/apps/details?id=com.jungle.gesuasmobile&hl=pt_BR",
     },
   ],
   contact: {
