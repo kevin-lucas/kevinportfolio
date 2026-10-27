@@ -62,7 +62,7 @@ export const siteConfig = {
       { value: "1.000+", label: "empresas operando no produto" },
     ],
     chips: ["System Design", "Clean Architecture", "Modularização"],
-    image: "/images/hero-1.svg",
+    image: "/images/about-arquitetura.svg",
   },
   // icon: "chart" | "mobile" | "layers" | "shield"
   services: [
@@ -86,7 +86,7 @@ export const siteConfig = {
     title: "8 anos construindo apps que",
     highlight: "escalam",
     text: "Desenvolvedor Mobile Sênior focado em Android nativo e Kotlin Multiplatform. Atuo de ponta a ponta, do desenho da arquitetura e integração de APIs REST até a governança do deploy na Google Play Store, liderando migrações complexas com Clean Code, testes e metodologias ágeis. Meu objetivo é elevar a qualidade técnica dos projetos e resolver desafios de performance para entregar produtos com eficiência.",
-    image: "/images/about.svg",
+    image: "/images/kevin-lucas.webp",
     cvLink: "/cv/kevin-lucas-cv.pdf",
   },
   experienceIntro:

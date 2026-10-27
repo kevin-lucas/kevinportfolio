@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="800" height="1000" role="img" aria-label="Arquitetura modular: apps Android e iOS sobre um núcleo compartilhado em Kotlin Multiplatform, conectado a APIs e à Play Store">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#121a16"/>
+      <stop offset="1" stop-color="#0a0f0d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#a3e635" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#a3e635" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lime" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a3e635"/>
+      <stop offset="1" stop-color="#4ade80"/>
+    </linearGradient>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="1" fill="#1f2a24"/>
+    </pattern>
+  </defs>
+
+  <rect width="400" height="500" fill="url(#bg)"/>
+  <rect width="400" height="500" fill="url(#dots)"/>
+  <ellipse cx="200" cy="262" rx="210" ry="170" fill="url(#glow)"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+    <!-- Conexões -->
+    <g fill="none" stroke="#a3e635" stroke-width="1.5" stroke-dasharray="4 5" stroke-linecap="round" opacity="0.7">
+      <path d="M110 148 V176 Q110 188 122 188 H170 Q182 188 182 200 V212"/>
+      <path d="M290 148 V176 Q290 188 278 188 H230 Q218 188 218 200 V212"/>
+      <path d="M150 324 V352 Q150 364 138 364 H122 Q110 364 110 376 V388"/>
+      <path d="M250 324 V352 Q250 364 262 364 H278 Q290 364 290 376 V388"/>
+    </g>
+    <g fill="#a3e635">
+      <circle cx="182" cy="212" r="3"/>
+      <circle cx="218" cy="212" r="3"/>
+      <circle cx="110" cy="388" r="3"/>
+      <circle cx="290" cy="388" r="3"/>
+    </g>
+
+    <!-- App Android -->
+    <rect x="40" y="76" width="140" height="72" rx="14" fill="#121a16" stroke="#1f2a24" stroke-width="1.5"/>
+    <rect x="56" y="94" width="22" height="36" rx="5" fill="none" stroke="#a3e635" stroke-width="1.5"/>
+    <line x1="64" y1="125" x2="70" y2="125" stroke="#a3e635" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="90" y="108" font-size="12" fill="#e7f0ea">:android</text>
+    <text x="90" y="124" font-size="10" fill="#8fa397">Compose</text>
+
+    <!-- App iOS -->
+    <rect x="220" y="76" width="140" height="72" rx="14" fill="#121a16" stroke="#1f2a24" stroke-width="1.5"/>
+    <rect x="236" y="94" width="22" height="36" rx="5" fill="none" stroke="#4ade80" stroke-width="1.5"/>
+    <line x1="244" y1="125" x2="250" y2="125" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="270" y="108" font-size="12" fill="#e7f0ea">:ios</text>
+    <text x="270" y="124" font-size="10" fill="#8fa397">SwiftUI</text>
+
+    <!-- Núcleo compartilhado (KMP) -->
+    <rect x="60" y="212" width="280" height="112" rx="18" fill="#0f1612" stroke="url(#lime)" stroke-width="2"/>
+    <circle cx="82" cy="236" r="4" fill="#a3e635"/>
+    <text x="94" y="240" font-size="12" fill="#e7f0ea">:shared</text>
+    <text x="318" y="240" font-size="10" fill="#a3e635" text-anchor="end">KMP</text>
+    <g font-size="10" fill="#e7f0ea" text-anchor="middle">
+      <rect x="76" y="258" width="76" height="26" rx="8" fill="#1f2a24"/>
+      <text x="114" y="275">domain</text>
+      <rect x="162" y="258" width="76" height="26" rx="8" fill="#1f2a24"/>
+      <text x="200" y="275">data</text>
+      <rect x="248" y="258" width="76" height="26" rx="8" fill="#1f2a24"/>
+      <text x="286" y="275">network</text>
+    </g>
+    <rect x="76" y="296" width="248" height="4" rx="2" fill="#1f2a24"/>
+    <rect x="76" y="296" width="248" height="4" rx="2" fill="url(#lime)"/>
+    <text x="324" y="314" font-size="9" fill="#8fa397" text-anchor="end">tests passing</text>
+
+    <!-- API REST -->
+    <rect x="40" y="388" width="140" height="64" rx="14" fill="#121a16" stroke="#1f2a24" stroke-width="1.5"/>
+    <text x="56" y="414" font-size="12" fill="#e7f0ea">REST API</text>
+    <text x="56" y="432" font-size="10" fill="#8fa397">200 OK · 84ms</text>
+
+    <!-- Deploy -->
+    <rect x="220" y="388" width="140" height="64" rx="14" fill="#121a16" stroke="#1f2a24" stroke-width="1.5"/>
+    <text x="236" y="414" font-size="12" fill="#e7f0ea">Play Store</text>
+    <circle cx="240" cy="429" r="3" fill="#4ade80"/>
+    <text x="250" y="432" font-size="10" fill="#8fa397">release v8.0</text>
+  </g>
+</svg>
