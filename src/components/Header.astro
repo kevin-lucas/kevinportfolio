@@ -9,10 +9,10 @@ const hasPortfolio = siteConfig.portfolio && siteConfig.portfolio.length > 0;
 const hasContact = !!siteConfig.contact;
 
 const links = [
-  { href: "#atuacao", label: "Atuação", show: hasServices },
-  { href: "#sobre", label: "Sobre", show: hasAbout },
-  { href: "#trajetoria", label: "Trajetória", show: hasExperience },
-  { href: "#stack", label: "Stack", show: hasSkills },
+  { href: "#servicos", label: "O que eu entrego", show: hasServices },
+  { href: "#sobre", label: "Sobre mim", show: hasAbout },
+  { href: "#experiencia", label: "Experiência", show: hasExperience },
+  { href: "#habilidades", label: "Ferramentas", show: hasSkills },
   { href: "#projetos", label: "Projetos", show: hasPortfolio },
 ].filter((link) => link.show);
 
@@ -50,7 +50,7 @@ const initials = siteConfig.name
       {
         hasContact && (
           <a href="#contato" class="kl-gradient hidden rounded-xl px-5 py-2.5 text-sm font-medium text-night transition-[transform,box-shadow] duration-[450ms] ease-snap hover:-translate-y-0.5 hover:shadow-glow sm:inline-flex">
-            Contato
+            Vamos conversar
           </a>
         )
       }
@@ -63,7 +63,7 @@ const initials = siteConfig.name
   <nav id="nav-drawer" class="hidden border-t border-edge bg-night/95 backdrop-blur-md lg:hidden">
     <ul class="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4">
       {
-        [...links, ...(hasContact ? [{ href: "#contato", label: "Contato", show: true }] : [])].map((link) => (
+        [...links, ...(hasContact ? [{ href: "#contato", label: "Vamos conversar", show: true }] : [])].map((link) => (
           <li>
             <a href={link.href} class="block rounded-xl px-4 py-3 text-sm text-subtle hover:bg-surface hover:text-ink">
               {link.label}
