@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Kevin Lucas",
   title: "Engenheiro de Software orientado a produto",
   description:
-    "Kevin Lucas, engenheiro de software sênior orientado a produto. System Design, Clean Architecture e modularização para escalar receita e reduzir custo operacional.",
+    "Kevin Lucas, engenheiro de software sênior especialista em apps Android e iOS. Crio aplicativos que ajudam o seu negócio a vender mais, operar melhor e gastar menos para manter.",
   accentColor: "#A3E635",
   // Metadados de SEO (Open Graph, Twitter Cards e JSON-LD) usados no <head> de index.astro.
   seo: {
@@ -53,7 +53,7 @@ export const siteConfig = {
     badge: "Disponível para novos produtos",
     title: "Engenheiro de software focado em",
     highlight: "produtos que geram resultado",
-    text: "Projeto e entrego software com arquitetura modular, segurança e escala desde o primeiro deploy, para o seu negócio vender mais, operar mais rápido e gastar menos com engenharia e infraestrutura.",
+    text: "Crio aplicativos seguros, estáveis e prontos para crescer junto com o seu negócio desde o primeiro dia. O resultado é um produto que vende mais, deixa a operação mais rápida e custa menos para manter.",
     primary: { label: "Ver resultados", link: "#projetos" },
     secondary: { label: "Conversar sobre seu produto", link: "#contato" },
     stats: [
@@ -61,7 +61,7 @@ export const siteConfig = {
       { value: "200 mil", label: "usuários em produção" },
       { value: "1.000+", label: "empresas operando no produto" },
     ],
-    chips: ["System Design", "Clean Architecture", "Modularização"],
+    chips: ["Apps Android e iOS", "Arquitetura sólida", "Pronto para crescer"],
     image: "/images/about-arquitetura.svg",
   },
   // icon: "chart" | "mobile" | "layers" | "shield"
@@ -69,58 +69,58 @@ export const siteConfig = {
     {
       icon: "chart",
       title: "Produtos que aceleram receita",
-      text: "Fluxos de negócio (onboarding, pagamento, negociação) desenhados para converter e medidos em produção. Na Fretebras, chat e chamadas in-app colocaram mais de 1.000 empresas e motoristas negociando sem sair do produto.",
+      text: "Jornadas como cadastro, pagamento e negociação pensadas para o cliente ir até o fim, com resultados acompanhados no uso real. Na Fretebras, o chat e as chamadas dentro do app colocaram mais de 1.000 empresas e motoristas negociando sem sair do produto.",
     },
     {
       icon: "layers",
-      title: "Velocidade de evolução com modularização",
-      text: "System Design e Clean Architecture com módulos de fronteiras claras: times entregam em paralelo, cada mudança tem impacto contido e a lógica em Kotlin Multiplatform serve Android e iOS com um único código.",
+      title: "Novidades mais rápidas, sem quebrar o que funciona",
+      text: "Organizo o app em partes independentes, que se encaixam como peças: a equipe trabalha em várias frentes ao mesmo tempo, cada mudança fica isolada e um único código atende Android e iOS (com Kotlin Multiplatform), em vez de dois apps para manter.",
     },
     {
       icon: "shield",
-      title: "Qualidade, segurança e escala sem retrabalho",
-      text: "Testes automatizados, camadas isoladas e decisões de infraestrutura avaliadas pelo custo. Migrei a Conta Digital, usada por 200 mil usuários, para Kotlin nativo e reconstruí a Central de Pendências, que levou a base verificada a 95%.",
+      title: "Qualidade e segurança para crescer sem retrabalho",
+      text: "Testes automáticos que pegam erros antes do usuário, dados protegidos e servidores escolhidos pelo custo-benefício. Modernizei a Conta Digital, usada por 200 mil pessoas, e reconstruí a Central de Pendências, que levou 95% dos cadastros a ficarem verificados.",
     },
   ],
   about: {
     title: "8 anos construindo apps que",
-    highlight: "escalam",
-    text: "Desenvolvedor Mobile Sênior focado em Android nativo e Kotlin Multiplatform. Atuo de ponta a ponta, do desenho da arquitetura e integração de APIs REST até a governança do deploy na Google Play Store, liderando migrações complexas com Clean Code, testes e metodologias ágeis. Meu objetivo é elevar a qualidade técnica dos projetos e resolver desafios de performance para entregar produtos com eficiência.",
+    highlight: "crescem",
+    text: "Sou desenvolvedor mobile sênior, especialista em apps Android e em apps que rodam no Android e no iPhone com um único código (Kotlin Multiplatform). Cuido do projeto de ponta a ponta: da estrutura do app e da conexão com os sistemas da empresa até a publicação na Google Play Store. Já liderei a modernização de apps grandes em pleno uso, com código bem cuidado, testes e entregas frequentes. Meu objetivo é entregar apps rápidos, estáveis e fáceis de evoluir.",
     image: "/images/kevin-lucas.webp",
     cvLink: "/cv/kevin-lucas-cv.pdf",
   },
   experienceIntro:
-    "8 anos em engenharia de software, do desenho da arquitetura ao produto em produção na Google Play Store.",
+    "8 anos criando software, da primeira ideia ao app nas mãos dos usuários pela Google Play Store.",
   experience: [
     {
       period: "2024 - Atual",
       role: "Desenvolvedor Android",
       company: "Fretebras",
-      text: "App Empresas em Kotlin Multiplatform, migração da Conta Digital para Kotlin nativo (200 mil usuários) e chat e chamadas in-app usados por mais de 1.000 empresas e motoristas.",
+      text: "App Empresas para Android e iOS com um único código (Kotlin Multiplatform), modernização da Conta Digital usada por 200 mil pessoas e chat e chamadas dentro do app usados por mais de 1.000 empresas e motoristas.",
     },
     {
       period: "2022 - 2024",
       role: "Desenvolvedor Android",
       company: "Deal Technologies",
-      text: "Reconstrução da Central de Pendências do app de motoristas, elevando a base verificada para 95%, e fluxo completo de negociação de fretes via chat.",
+      text: "Reconstrução da Central de Pendências do app de motoristas, que levou 95% dos cadastros a ficarem verificados, e negociação de fretes completa pelo chat.",
     },
     {
       period: "2021 - 2022",
       role: "Desenvolvedor Android",
       company: "Gesuas",
-      text: "Primeiro app da empresa para Assistência Social, de ponta a ponta até a Play Store, com Retrofit, Coroutines e Room offline-first.",
+      text: "Primeiro app da empresa, voltado à Assistência Social, criado do zero até a publicação na Play Store e preparado para funcionar mesmo sem internet.",
     },
     {
       period: "2019 - 2020",
       role: "Desenvolvedor Júnior",
       company: "Diefra Engenharia",
-      text: "Desenvolvimento full-stack e Android, mais de 100 melhorias no ERP e treinamentos técnicos para mais de 200 colaboradores e clientes.",
+      text: "Desenvolvimento de sistemas web e Android, mais de 100 melhorias no sistema de gestão (ERP) da empresa e treinamentos para mais de 200 colaboradores e clientes.",
     },
     {
       period: "2018 - 2019",
       role: "Estágio TI",
       company: "Luiza Barcelos",
-      text: "App Android para controle de tickets de refeição, eliminando custos com insumos físicos, além de suporte a ERP e infraestrutura.",
+      text: "App Android para controle de tickets de refeição, que acabou com os gastos com tickets em papel, além de suporte ao sistema de gestão (ERP) e à infraestrutura de TI.",
     },
   ],
   skills: [
@@ -135,7 +135,7 @@ export const siteConfig = {
   portfolio: [
     {
       name: "Fretebras",
-      category: "Kotlin Multiplatform e Android Nativo",
+      category: "App Android e iOS",
       images: [
         "/images/portfolio/fretebras-2.jpg",
         "/images/portfolio/fretebras-3.jpg",
@@ -146,7 +146,7 @@ export const siteConfig = {
     },
     {
       name: "Gesuas Mobile",
-      category: "Android Nativo",
+      category: "App Android",
       images: [
         "/images/portfolio/gesuas-1.jpg",
         "/images/portfolio/gesuas-2.jpg",
