@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Kevin Lucas's personal portfolio (https://kevinlucas.com.br), an Astro + Tailwind CSS v4 site with its own visual identity (green-tinted black + neon lime). It is a single static page whose content is driven by `src/config.ts`. Site content and section headings are in Brazilian Portuguese.
+Kevin Lucas's personal portfolio (https://kevinlucas.com.br), an Astro + Tailwind CSS v4 site with its own visual identity (green-tinted black + neon lime). It is a static site with two pages — the home (`index.astro`) and `/startups` (`startups.astro`, offers from `siteConfig.startups`) — both driven by `src/config.ts` and wrapped in `src/layouts/Base.astro` (shared `<head>`, `SITE_PUBLISHED` gate and origin tracking). Site content and section headings are in Brazilian Portuguese.
 
 There is no linter, type-checker script, or test suite. `npm run build` is the only way to confirm changes compile.
 
@@ -12,7 +12,7 @@ There is no linter, type-checker script, or test suite. `npm run build` is the o
 
 Pushing to `master` deploys to GitHub Pages via `.github/workflows/deploy.yml` (`withastro/action`). `astro.config.mjs` sets `site: "https://kevinlucas.com.br"` and `base: "/"` — the site is served from the domain root, so don't add a base path.
 
-`SITE_PUBLISHED` (boolean, declared with `astro:env` in `astro.config.mjs`) decides at build time what `index.astro` renders: `true` = full site, `false` or unset = `UnderConstruction.astro` (with `noindex`). In CI it comes from the GitHub repository variable `vars.SITE_PUBLISHED` (see `deploy.yml`); after changing it, re-run the workflow (`gh workflow run deploy.yml`). Locally the default is the under-construction page — run `SITE_PUBLISHED=true npm run dev` (or put it in `.env`, which is gitignored) to work on the real site.
+`SITE_PUBLISHED` (boolean, declared with `astro:env` in `astro.config.mjs`) decides at build time what `Base.astro` renders: `true` = full site, `false` or unset = `UnderConstruction.astro` (with `noindex`). In CI it comes from the GitHub repository variable `vars.SITE_PUBLISHED` (see `deploy.yml`); after changing it, re-run the workflow (`gh workflow run deploy.yml`). Locally the default is the under-construction page — run `SITE_PUBLISHED=true npm run dev` (or put it in `.env`, which is gitignored) to work on the real site.
 
 ## Gotchas and cross-file rules
 
@@ -23,11 +23,13 @@ Pushing to `master` deploys to GitHub Pages via `.github/workflows/deploy.yml` (
 - **Conditional sections:** every section renders nothing when its config data is empty or missing. The `has*` checks in `Header.astro` build the nav links (desktop + mobile drawer). Social links render only when their value is truthy. The contact form only renders when `contact.formAction` (e.g. a Formspree endpoint) is set.
 - **Adding a section:** add data to `config.ts`, create the component with a `<section id="...">`, add it to `index.astro`, and add the matching link / `has*` check in `Header.astro`.
 - **Icons:** Tabler Icons are pasted in as inline `<svg>` markup (no icon package). Copy new icons from tabler.io the same way.
-- **SEO:** `index.astro` builds canonical, Open Graph, Twitter Cards and JSON-LD (`Person` + `WebSite` + `ProfilePage`) from `siteConfig` + `siteConfig.seo`, only when `SITE_PUBLISHED` (otherwise `noindex`). `seo.keywords` feeds both `<meta name="keywords">` and the JSON-LD `knowsAbout` (merged, deduped). `src/pages/robots.txt.ts` and `sitemap.xml.ts` are static endpoints; robots also switches on `SITE_PUBLISHED`. `public/og.png` (1200×630) is the share image — regenerate it if the hero headline changes. Fonts are self-hosted via `@fontsource/*` imports in `index.astro` (no Google Fonts).
+- **Links between pages:** nav links use `/#section` so they also work from `/startups`. The main CTA is `contact.bookingUrl` (Cal.com); links to it carry `data-booking`.
+- **Origin tracking:** `?origem=x` (or `utm_source`) is saved in `localStorage` by the script in `Base.astro` and appended to WhatsApp text, mailto subject and booking links (`metadata[origem]`). No analytics service.
+- **SEO:** `Base.astro` renders canonical/OG/Twitter per page; `index.astro` builds canonical, Open Graph, Twitter Cards and JSON-LD (`Person` + `WebSite` + `ProfilePage`) from `siteConfig` + `siteConfig.seo`, only when `SITE_PUBLISHED` (otherwise `noindex`). `seo.keywords` feeds both `<meta name="keywords">` and the JSON-LD `knowsAbout` (merged, deduped). `src/pages/robots.txt.ts` and `sitemap.xml.ts` are static endpoints; robots also switches on `SITE_PUBLISHED`. `public/og.png` (1200×630) is the share image — regenerate it if the hero headline changes. Fonts are self-hosted via `@fontsource/*` imports in `Base.astro` (no Google Fonts).
 - **UI text:** section labels and headings ("Atuação", "Trajetória", "Baixar CV", nav labels, etc.) are hardcoded in Portuguese in the components, not in config.
 
 ## Conventions (from `.cursor/rules`)
 
 - Use Tailwind utility classes for styling; keep the site's own identity: green-tinted black background, neon lime accent with gradients, Space Grotesk headings (sentence case) and Inter body text, rounded corners (`rounded-xl` buttons, `rounded-2xl` cards, `rounded-3xl` images).
 - Prefer config changes over component changes; keep component logic minimal and don't add abstraction layers.
-- Keep the single-page structure; new sections must hide when their config data is removed.
+- Keep the home as a single page (plus `/startups`); new sections must hide when their config data is removed.

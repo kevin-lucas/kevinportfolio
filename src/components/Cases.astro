@@ -1,0 +1,47 @@
+---
+import { siteConfig } from "../config";
+
+const cases = siteConfig.cases ?? [];
+const steps = [
+  { key: "problem", label: "Problema" },
+  { key: "solution", label: "Solução" },
+  { key: "result", label: "Resultado" },
+] as const;
+---
+
+{
+  cases.length > 0 && (
+    <section id="resultados" class="py-24 md:py-28">
+      <div class="mx-auto max-w-6xl px-5">
+        <span class="inline-flex items-center gap-2 rounded-full border border-edge px-3.5 py-1 text-xs text-subtle">
+          <span class="h-1.5 w-1.5 rounded-full bg-lime"></span>
+          Resultados
+        </span>
+        <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold tracking-tight md:text-4xl">
+          Problemas reais, resultados <span class="kl-gradient-text">medidos</span>
+        </h2>
+
+        <div class="mt-12 grid gap-5 md:grid-cols-3">
+          {cases.map((item) => (
+            <article class="flex flex-col rounded-2xl border border-edge bg-surface p-7 transition-[transform,border-color,box-shadow] duration-[450ms] ease-snap hover:-translate-y-1 hover:border-lime/60 hover:shadow-glow">
+              <p class="font-display text-5xl font-semibold tracking-tight">
+                <span class="kl-gradient-text">{item.metric}</span>
+              </p>
+              <p class="mt-2 text-sm text-ink">{item.metricLabel}</p>
+              <p class="mt-6 border-t border-edge pt-5 text-xs text-lime">{item.company}</p>
+              <h3 class="mt-1 font-display text-xl font-semibold">{item.title}</h3>
+              <dl class="mt-5 space-y-4">
+                {steps.map((step) => (
+                  <div>
+                    <dt class="text-xs font-medium uppercase tracking-wider text-subtle">{step.label}</dt>
+                    <dd class:list={["mt-1 text-sm leading-6", step.key === "result" ? "text-ink" : "text-subtle"]}>{item[step.key]}</dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

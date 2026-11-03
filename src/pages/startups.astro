@@ -1,0 +1,82 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Cases from "../components/Cases.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import { siteConfig } from "../config";
+
+const startups = siteConfig.startups;
+// Sem ofertas no config, a página só redireciona para a home.
+if (!startups?.offers?.length) return Astro.redirect("/");
+const bookingUrl = siteConfig.contact?.bookingUrl;
+const ctaHref = bookingUrl || "#contato";
+const ctaAttrs = bookingUrl ? { target: "_blank", rel: "noopener noreferrer", "data-booking": "" } : {};
+const pageTitle = `Para startups - ${siteConfig.name}`;
+const description = `${startups.title} ${startups.highlight}. ${startups.offers.map((offer) => offer.name).join(", ")}.`;
+---
+
+<Base title={pageTitle} description={description} path="/startups">
+  <Header />
+  <main>
+    <section id="inicio" class="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
+      <div class="kl-grid-bg pointer-events-none absolute inset-0" aria-hidden="true"></div>
+      <div class="kl-glow pointer-events-none absolute -top-20 right-[-10%] h-[520px] w-[520px]" aria-hidden="true"></div>
+
+      <div class="relative mx-auto max-w-3xl px-5 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full border border-edge bg-surface/70 px-4 py-1.5 text-xs text-subtle">
+          <span class="h-1.5 w-1.5 rounded-full bg-lime shadow-[0_0_10px_var(--color-lime)]"></span>
+          {startups.badge}
+        </span>
+        <h1 class="mt-6 font-display text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl">
+          {startups.title}{" "}<span class="kl-gradient-text">{startups.highlight}</span>
+        </h1>
+        <p class="mx-auto mt-6 max-w-xl text-base leading-7 text-subtle">{startups.text}</p>
+        <div class="mt-9 flex flex-wrap justify-center gap-3">
+          <a href={ctaHref} {...ctaAttrs} class="kl-gradient inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-night transition-[transform,box-shadow] duration-[450ms] ease-snap hover:-translate-y-0.5 hover:shadow-glow">
+            Agendar conversa de 20 min
+          </a>
+          <a href="#ofertas" class="inline-flex items-center rounded-xl border border-edge px-6 py-3 text-sm font-medium text-ink transition-colors duration-[450ms] ease-snap hover:border-lime hover:text-lime">
+            Ver os serviços
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="ofertas" class="pb-24 md:pb-28">
+      <div class="mx-auto grid max-w-6xl gap-5 px-5 md:grid-cols-3">
+        {startups.offers.map((offer) => (
+          <article class:list={["flex flex-col rounded-2xl border bg-surface p-7", offer.featured ? "border-lime/60 shadow-glow" : "border-edge"]}>
+            <div class="flex items-center justify-between gap-3">
+              <h2 class="font-display text-2xl font-semibold">{offer.name}</h2>
+              <span class="rounded-full bg-lime/10 px-3 py-1 text-xs font-medium text-lime">{offer.duration}</span>
+            </div>
+            <p class="mt-4 text-sm leading-6 text-subtle">{offer.for}</p>
+            <p class="mt-6 text-xs font-medium uppercase tracking-wider text-subtle">O que está incluído</p>
+            <ul class="mt-3 space-y-2.5">
+              {offer.includes.map((item) => (
+                <li class="flex gap-2.5 text-sm leading-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-1 h-4 w-4 shrink-0 text-lime"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l5 5l10 -10"></path></svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-auto pt-8">
+              {offer.price && <p class="mb-4 font-display text-lg font-semibold">{offer.price}</p>}
+              <a href={ctaHref} {...ctaAttrs} class:list={[
+                "flex justify-center rounded-xl px-6 py-3 text-sm font-medium transition-[transform,box-shadow,color,border-color] duration-[450ms] ease-snap",
+                offer.featured ? "kl-gradient text-night hover:-translate-y-0.5 hover:shadow-glow" : "border border-edge text-ink hover:border-lime hover:text-lime",
+              ]}>
+                Conversar sobre {offer.name}
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <Cases />
+    <Contact />
+  </main>
+  <Footer />
+</Base>

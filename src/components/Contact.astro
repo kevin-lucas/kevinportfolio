@@ -6,6 +6,7 @@ const fieldClass =
   "w-full rounded-xl border border-edge bg-night px-4 py-3 text-sm text-ink placeholder:text-subtle outline-none transition-colors duration-[450ms] ease-snap focus:border-lime";
 const tileClass =
   "flex items-center gap-4 rounded-2xl border border-edge bg-night/60 p-5 transition-colors duration-[450ms] ease-snap hover:border-lime/50";
+const bookingUrl = contact?.bookingUrl;
 const iconClass = "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-lime/10 text-lime";
 ---
 
@@ -24,6 +25,12 @@ const iconClass = "flex h-11 w-11 shrink-0 items-center justify-center rounded-f
                 {contact.title}{" "}<span class="kl-gradient-text">{contact.highlight}</span>
               </h2>
               <p class="mt-5 text-base leading-7 text-subtle">{contact.text}</p>
+              {bookingUrl && (
+                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" data-booking class="kl-gradient mt-8 inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-night transition-[transform,box-shadow] duration-[450ms] ease-snap hover:-translate-y-0.5 hover:shadow-glow">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
+                  Agendar conversa de 20 min
+                </a>
+              )}
             </div>
 
             <div class="mt-12 grid gap-4 md:grid-cols-3">

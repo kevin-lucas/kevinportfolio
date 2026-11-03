@@ -1,0 +1,101 @@
+---
+// <head> comum (SEO, fontes, CSS) + rastreio de origem. Sem SITE_PUBLISHED mostra "em construção".
+import UnderConstruction from "../components/UnderConstruction.astro";
+import { siteConfig } from "../config";
+import { SITE_PUBLISHED } from "astro:env/server";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/600.css";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogType?: string;
+  jsonLd?: object;
+}
+
+const { title, description, path, ogType = "website", jsonLd } = Astro.props;
+const seo = siteConfig.seo;
+const pageUrl = new URL(path, Astro.site).href;
+const ogImage = seo?.ogImage && new URL(seo.ogImage, Astro.site).href;
+const twitterHandle = siteConfig.social.twitter && `@${siteConfig.social.twitter.replace(/\/+$/, "").split("/").pop()}`;
+const keywords = seo?.keywords ?? [];
+---
+
+<html lang="pt-BR" style={`--color-lime: ${siteConfig.accentColor}`}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0f0d" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    {
+      SITE_PUBLISHED ? (
+        <>
+          <link rel="canonical" href={pageUrl} />
+          {keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
+          <meta property="og:type" content={ogType} />
+          <meta property="og:site_name" content={siteConfig.name} />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={description} />
+          <meta property="og:url" content={pageUrl} />
+          {seo?.locale && <meta property="og:locale" content={seo.locale} />}
+          {ogImage && (
+            <>
+              <meta property="og:image" content={ogImage} />
+              <meta property="og:image:width" content="1200" />
+              <meta property="og:image:height" content="630" />
+              <meta property="og:image:alt" content={seo.ogImageAlt} />
+            </>
+          )}
+          <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={description} />
+          {ogImage && <meta name="twitter:image" content={ogImage} />}
+          {twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
+          {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+        </>
+      ) : (
+        <meta name="robots" content="noindex" />
+      )
+    }
+  </head>
+  <body class="antialiased">
+    {SITE_PUBLISHED ? <slot /> : <UnderConstruction />}
+  </body>
+</html>
+
+<script>
+  // Rastreio por canal: ?origem=linkedin (ou utm_source) fica salvo no navegador e segue
+  // junto no texto do WhatsApp, no assunto do e-mail e nos dados do agendamento.
+  const params = new URLSearchParams(location.search);
+  const fromUrl = (params.get("origem") || params.get("utm_source") || "").trim().toLowerCase().slice(0, 40);
+  if (fromUrl) localStorage.setItem("origem", fromUrl);
+  const origem = fromUrl || localStorage.getItem("origem") || "";
+
+  const page = location.pathname === "/" ? "site" : `página ${location.pathname}`;
+  const tag = origem ? ` (origem: ${origem})` : "";
+
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="https://wa.me/"]').forEach((a) => {
+    const url = new URL(a.href);
+    url.searchParams.set("text", `Olá, Kevin! Vim pelo ${page}${tag}.`);
+    a.href = url.href;
+  });
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:"]').forEach((a) => {
+    const [address] = a.href.split("?");
+    a.href = `${address}?subject=${encodeURIComponent(`Contato pelo ${page}${tag}`)}`;
+  });
+  if (origem) {
+    document.querySelectorAll<HTMLAnchorElement>("a[data-booking]").forEach((a) => {
+      const url = new URL(a.href);
+      url.searchParams.set("metadata[origem]", origem);
+      url.searchParams.set("utm_source", origem);
+      a.href = url.href;
+    });
+  }
+</script>

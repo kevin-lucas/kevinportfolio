@@ -1,6 +1,8 @@
 ---
+import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import Cases from "../components/Cases.astro";
 import Services from "../components/Services.astro";
 import About from "../components/About.astro";
 import Experience from "../components/Experience.astro";
@@ -8,23 +10,15 @@ import Skills from "../components/Skills.astro";
 import Portfolio from "../components/Portfolio.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
-import UnderConstruction from "../components/UnderConstruction.astro";
 import { siteConfig } from "../config";
-import { SITE_PUBLISHED } from "astro:env/server";
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/space-grotesk/500.css";
-import "@fontsource/space-grotesk/600.css";
-import "../styles/global.css";
 
 const seo = siteConfig.seo;
 const pageTitle = `${siteConfig.name} - ${siteConfig.title}`;
 const siteUrl = new URL("/", Astro.site).href;
 const ogImage = seo?.ogImage && new URL(seo.ogImage, Astro.site).href;
-const twitterHandle = siteConfig.social.twitter && `@${siteConfig.social.twitter.replace(/\/+$/, "").split("/").pop()}`;
 const keywords = seo?.keywords ?? [];
 const knowsAbout = [...new Set([...(seo?.knowsAbout ?? []), ...keywords])];
-const sameAs =[siteConfig.social.linkedin, siteConfig.social.github, siteConfig.social.twitter].filter(Boolean);
+const sameAs = [siteConfig.social.linkedin, siteConfig.social.github, siteConfig.social.twitter].filter(Boolean);
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -70,65 +64,17 @@ const jsonLd = {
 };
 ---
 
-<html lang="pt-BR" style={`--color-lime: ${siteConfig.accentColor}`}>
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0f0d" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={siteConfig.description} />
-    <title>{pageTitle}</title>
-    {
-      SITE_PUBLISHED ? (
-        <>
-          <link rel="canonical" href={siteUrl} />
-          {keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
-          <meta property="og:type" content="profile" />
-          <meta property="og:site_name" content={siteConfig.name} />
-          <meta property="og:title" content={pageTitle} />
-          <meta property="og:description" content={siteConfig.description} />
-          <meta property="og:url" content={siteUrl} />
-          {seo?.locale && <meta property="og:locale" content={seo.locale} />}
-          {ogImage && (
-            <>
-              <meta property="og:image" content={ogImage} />
-              <meta property="og:image:width" content="1200" />
-              <meta property="og:image:height" content="630" />
-              <meta property="og:image:alt" content={seo.ogImageAlt} />
-            </>
-          )}
-          <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
-          <meta name="twitter:title" content={pageTitle} />
-          <meta name="twitter:description" content={siteConfig.description} />
-          {ogImage && <meta name="twitter:image" content={ogImage} />}
-          {twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
-          <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-        </>
-      ) : (
-        <meta name="robots" content="noindex" />
-      )
-    }
-  </head>
-  <body class="antialiased">
-    {
-      SITE_PUBLISHED ? (
-        <>
-          <Header />
-          <main>
-            <Hero />
-            <Services />
-            <About />
-            <Experience />
-            <Skills />
-            <Portfolio />
-            <Contact />
-          </main>
-          <Footer />
-        </>
-      ) : (
-        <UnderConstruction />
-      )
-    }
-  </body>
-</html>
+<Base title={pageTitle} description={siteConfig.description} path="/" ogType="profile" jsonLd={jsonLd}>
+  <Header />
+  <main>
+    <Hero />
+    <Cases />
+    <Services />
+    <About />
+    <Experience />
+    <Skills />
+    <Portfolio />
+    <Contact />
+  </main>
+  <Footer />
+</Base>

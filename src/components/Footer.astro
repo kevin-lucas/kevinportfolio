@@ -11,6 +11,9 @@ const iconLinkClass =
       <p>© {new Date().getFullYear()} {siteConfig.name}</p>
       {siteConfig.company?.legalName && <p>{siteConfig.company.legalName}</p>}
       {siteConfig.company?.cnpj && <p>CNPJ {siteConfig.company.cnpj}</p>}
+      {siteConfig.social.email && (
+        <a href={`mailto:${siteConfig.social.email}`} class="mt-1 text-ink transition-colors duration-[450ms] ease-snap hover:text-lime">{siteConfig.social.email}</a>
+      )}
     </div>
 
     <div class="flex items-center gap-3">
@@ -35,15 +38,8 @@ const iconLinkClass =
           </a>
         )
       }
-      {
-        siteConfig.social.email && (
-          <a href={`mailto:${siteConfig.social.email}`} aria-label="Email" class={iconLinkClass}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path><path d="M3 7l9 6l9 -6"></path></svg>
-          </a>
-        )
-      }
     </div>
 
-    <a href="#inicio" class="text-sm text-subtle transition-colors duration-[450ms] ease-snap hover:text-lime">Voltar ao topo ↑</a>
+    <a href="#" class="text-sm text-subtle transition-colors duration-[450ms] ease-snap hover:text-lime">Voltar ao topo ↑</a>
   </div>
 </footer>

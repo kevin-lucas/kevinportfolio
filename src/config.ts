@@ -59,8 +59,9 @@ export const siteConfig = {
     title: "Engenheiro de software focado em",
     highlight: "produtos que geram resultado",
     text: "Crio aplicativos seguros, estáveis e prontos para crescer junto com o seu negócio desde o primeiro dia. O resultado é um produto que vende mais, deixa a operação mais rápida e custa menos para manter.",
-    primary: { label: "Ver resultados", link: "#projetos" },
-    secondary: { label: "Conversar sobre seu produto", link: "#contato" },
+    primary: { label: "Ver resultados", link: "/#resultados" },
+    // Link vazio usa o agendamento (contact.bookingUrl).
+    secondary: { label: "Agendar conversa de 20 min", link: "" },
     stats: [
       { value: "8+", label: "anos entregando produtos" },
       { value: "200 mil", label: "usuários em produção" },
@@ -94,6 +95,36 @@ export const siteConfig = {
     image: "/images/kevin-lucas.webp",
     cvLink: "/cv/kevin-lucas-cv.pdf",
   },
+  // Casos no formato problema → solução → resultado, com o número em destaque.
+  cases: [
+    {
+      metric: "200 mil",
+      metricLabel: "pessoas usando a Conta Digital modernizada",
+      company: "Fretebras",
+      title: "Conta Digital",
+      problem: "Um app financeiro grande, em pleno uso, que precisava evoluir sem colocar em risco quem dependia dele todos os dias.",
+      solution: "Modernizei o app em partes independentes, com testes automáticos e entregas frequentes, sem parar a operação.",
+      result: "Conta Digital estável e mais fácil de evoluir, atendendo 200 mil pessoas.",
+    },
+    {
+      metric: "95%",
+      metricLabel: "dos cadastros verificados",
+      company: "Deal Technologies",
+      title: "Central de Pendências",
+      problem: "Motoristas travavam no cadastro: pendências difíceis de entender e resolver pelo app deixavam contas sem verificação.",
+      solution: "Reconstruí a Central de Pendências com um passo a passo claro para o motorista resolver tudo sem sair do app.",
+      result: "95% dos cadastros passaram a ficar verificados.",
+    },
+    {
+      metric: "Offline",
+      metricLabel: "funciona mesmo sem internet",
+      company: "Gesuas",
+      title: "Primeiro app da empresa",
+      problem: "Equipes da Assistência Social trabalham em campo, muitas vezes sem internet, e a empresa ainda não tinha app.",
+      solution: "Criei o app do zero, guardando os dados no aparelho e sincronizando quando a conexão volta.",
+      result: "App publicado na Play Store e usado em campo mesmo sem sinal.",
+    },
+  ],
   experienceIntro:
     "8 anos criando software, da primeira ideia ao app nas mãos dos usuários pela Google Play Store.",
   experience: [
@@ -164,12 +195,62 @@ export const siteConfig = {
   contact: {
     title: "Vamos construir algo",
     highlight: "juntos",
-    text: "Tem um app em mente ou uma vaga para conversar? Mande uma mensagem e eu respondo o quanto antes.",
+    text: "Tem um app em mente ou um produto que precisa evoluir? Agende 20 minutos comigo e saia da conversa com os próximos passos.",
     email: "contato@kevinlucas.com.br",
+    // Agendamento direto (Cal.com, Calendly ou Google Agenda). Vazio usa o WhatsApp/contato.
+    bookingUrl: "https://cal.com/kevin-lucas-dyo0oh/20-minutos",
     // Número com DDD, exibido como está; o link https://wa.me/ adiciona o 55 (Brasil) e usa só os dígitos.
     whatsapp: "(31) 98651-2610",
     address: "Belo Horizonte, MG — Brasil",
     // Endpoint do formulário (ex.: https://formspree.io/f/xxxx). Vazio esconde o formulário.
     formAction: "",
+  },
+  // Página /startups (some do menu e do sitemap se ficar vazio).
+  startups: {
+    badge: "Para startups",
+    title: "Do zero ao app nas lojas,",
+    highlight: "sem desperdiçar runway",
+    text: "Três formas de trabalhar juntos, com prazo e escopo fechados. Escolha a que encaixa no momento da sua startup, ou agende 20 minutos e decidimos juntos.",
+    // price é opcional (ex.: "a partir de R$ 5.000"); vazio não aparece.
+    offers: [
+      {
+        name: "Diagnóstico",
+        duration: "1 semana",
+        for: "Para quem já tem um app (ou um plano) e quer saber onde está o risco antes de investir mais.",
+        includes: [
+          "Revisão do app, da arquitetura e do processo de entrega",
+          "Lista de riscos e gargalos priorizada por impacto no negócio",
+          "Plano de ação para os próximos 90 dias",
+          "Reunião de apresentação com os fundadores",
+        ],
+        price: "",
+      },
+      {
+        name: "Sprint de MVP",
+        duration: "4 a 6 semanas",
+        for: "Para quem precisa colocar a primeira versão nas mãos dos usuários e validar rápido.",
+        includes: [
+          "Definição do escopo mínimo junto com você",
+          "App Android e iOS com um único código (Kotlin Multiplatform)",
+          "Publicação na Google Play e na App Store",
+          "Métricas e monitoramento de erros desde o primeiro dia",
+          "Entregas semanais para você acompanhar",
+        ],
+        price: "",
+        featured: true,
+      },
+      {
+        name: "Consultoria",
+        duration: "Pacote de horas",
+        for: "Para quem já tem um app ou um time e precisa de um engenheiro sênior em pontos específicos.",
+        includes: [
+          "Horas mensais combinadas, usadas conforme a sua necessidade",
+          "Revisão de código e de arquitetura",
+          "Apoio em decisões técnicas e de produto",
+          "Entregas pontuais, como uma funcionalidade, uma integração ou uma correção crítica",
+        ],
+        price: "",
+      },
+    ],
   },
 };

@@ -2,6 +2,10 @@
 import { siteConfig } from "../config";
 
 const hero = siteConfig.hero;
+const bookingUrl = siteConfig.contact?.bookingUrl;
+// Botão secundário sem link próprio vai para o agendamento (ou para o contato, sem agenda).
+const secondaryHref = hero?.secondary.link || bookingUrl || "/#contato";
+const secondaryAttrs = secondaryHref === bookingUrl ? { target: "_blank", rel: "noopener noreferrer", "data-booking": "" } : {};
 const chipPositions = ["-left-4 top-10", "-right-3 top-10", "left-6 -bottom-4"];
 ---
 
@@ -29,7 +33,7 @@ const chipPositions = ["-left-4 top-10", "-right-3 top-10", "left-6 -bottom-4"];
               {hero.primary.label}
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg>
             </a>
-            <a href={hero.secondary.link} class="inline-flex items-center rounded-xl border border-edge px-6 py-3 text-sm font-medium text-ink transition-colors duration-[450ms] ease-snap hover:border-lime hover:text-lime">
+            <a href={secondaryHref} {...secondaryAttrs} class="inline-flex items-center rounded-xl border border-edge px-6 py-3 text-sm font-medium text-ink transition-colors duration-[450ms] ease-snap hover:border-lime hover:text-lime">
               {hero.secondary.label}
             </a>
           </div>
