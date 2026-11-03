@@ -7,7 +7,11 @@ const iconLinkClass =
 
 <footer class="border-t border-edge">
   <div class="mx-auto flex max-w-6xl flex-col items-center gap-6 px-5 py-10 sm:flex-row sm:justify-between">
-    <p class="text-sm text-subtle">© {new Date().getFullYear()} {siteConfig.name}</p>
+    <div class="flex flex-col gap-1 text-center text-sm text-subtle sm:text-left">
+      <p>© {new Date().getFullYear()} {siteConfig.name}</p>
+      {siteConfig.company?.legalName && <p>{siteConfig.company.legalName}</p>}
+      {siteConfig.company?.cnpj && <p>CNPJ {siteConfig.company.cnpj}</p>}
+    </div>
 
     <div class="flex items-center gap-3">
       {

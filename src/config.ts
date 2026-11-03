@@ -49,6 +49,11 @@ export const siteConfig = {
     twitter: "",
     github: "https://github.com/kevin-lucas",
   },
+  // Dados da empresa exibidos no rodapé (some se legalName ficar vazio).
+  company: {
+    legalName: "Kevin Lucas Alves Fonseca Consultoria em Tecnologia da Informação LTDA",
+    cnpj: "44.635.029/0001-15",
+  },
   hero: {
     badge: "Disponível para novos produtos",
     title: "Engenheiro de software focado em",
